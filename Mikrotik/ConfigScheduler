@@ -1,0 +1,8 @@
+#Exibe as tarefas existentes
+/system scheduler print 
+
+#Remove a tarefa de indice 0
+/system scheduler remove 0
+
+#Adiciona uma nova tarefa
+/system scheduler add start-date="Apr/17/2019" start-time="01:00:00" interval="1d 00:00:00" comment="Backup diario" name="Backup_Diario" on-event="Backup_Aut_Diario"
