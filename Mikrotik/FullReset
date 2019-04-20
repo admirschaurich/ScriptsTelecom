@@ -1,0 +1,2 @@
+#Reseta completamente o equipamento, removendo todas as configurações de fabrica
+/system reset-configuration no-defaults=yes
