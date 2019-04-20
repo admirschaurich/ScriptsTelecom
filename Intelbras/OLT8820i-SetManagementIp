@@ -1,0 +1,25 @@
+#Na OLT
+#Seta na placa de rede do PC o ip 192.168.10.2/24
+#Loga na OLT via ssh pelo ip 192.168.10.1, usuário intelbras e senha intelbras
+#Desabilita o timeout de conexão com o comando: 
+timeout off
+
+#Cria uma bridge de uplink na ether 2 da OLT: 
+brige add 1-1-2-0/eth uplink vlan 1002 tagged
+
+#Adiciona um interface do tipo Ip on Bridge com o comando: 
+#nota: Quando adicionar uma interface do tipo ip on bridge, a porta vai ser SEMPRE 1-1-6-0/iponbrigde
+interface add 1-1-6-0/ipobridge vlan 1002 10.90.9.6/30
+
+#Adiciona uma rota estática de salto 1 apontando para o gateway da OLT, com o comando: 
+route add 000.000.000.000 000.000.000.000 10.90.9.5 1
+
+
+#No Concentrador
+-Cria uma VLAN(no exemplo foi usada a vlan 1002) para na porta ether que vai ser conectada a OLT
+-Cria um ip /30 e aponta para a VLAN criada
+
+Fisicamente
+-Conecta um cabo de rede da porta fisica do concentrador, onde foi configurada a VLAN e conecta na ether 2 da OLT
+
+#NOTA: A porta ether 2 da OLT citada nesse exemplo pode ser alterada para qualquer ether ou sfp de uplink que a OLT tiver disponível
