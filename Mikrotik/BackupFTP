@@ -1,0 +1,26 @@
+/system script
+add name=Backup_Aut_Diario owner=admin policy=ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon source="/system clock \
+    set time-zone-name=\"America/Sao_Paulo\"\r\
+    \n/system ntp client set enabled=no\r\
+    \n/system ntp client set enabled=yes primary-ntp=172.16.0.126 secondary-ntp=172.16.0.126\r\
+    \n:log info \"backup beginning now\"\r\
+    \n:global name=backupfile value=([/system identity get name] . \"-\" . [/system clock get time])\r\
+    \n/system backup save name=\$backupfile dont-encrypt=no\r\
+    \n:log info \"backup pausing for 2s\"\r\
+    \n:delay 2s\r\
+    \n:log info \"backup being uploaded\"\r\
+    \n/tool fetch address=\"ftp-address\" port=ftp-port  src-path=([\$backupfile].\".backup\") user=\"ftp-user\" mode=ftp password=\"ftp-user-password\" dst-path=(\"/1-Rede\
+    s/1-Backups/1-GO/\$backupfile\".\".backup\") upload=yes\r\
+    \n:log info \"backup finished\"\r\
+    \n:delay 20s\r\
+    \n:log info \"Deleting Backup File\"\r\
+    \n/file remove \$backupfile;\r\
+    \n:log info \"Deleting Backupfile File\""
+    
+    
+    #NOTA: Mude os parâmetros:
+    #ftp-address -> Ip do servidor FTP
+    #ftp-port -> Porta o servidor FTP
+    #ftp-user -> Usuário do servidor FTP
+    #ftp-user-password -> Senha do usuário FTP
+    # Em dst-path, altere o caminho para uma diretório que existe em seu servidor FTP
