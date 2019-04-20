@@ -1,0 +1,2 @@
+#Após acessar o equipamento por SSH
+cfgmtd -f /usr/etc/system.cfg -w && reboot
