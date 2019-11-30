@@ -1,4 +1,4 @@
-#Seta na interface fisica um ip na rede 192.168.0.0/24, que seja diferente de 0.1 e 0.2
+#Seta na interface fisica que o rádio está conectado, um ip na rede 192.168.0.0/24, que seja diferente de 0.1 e 0.2(EX: 192.168.0.5)
 #Faz a conexão por SSH no dispositivo no ip 192.168.0.1(se o radio estiver no modo AP) ou 192.168.0.2(Se o rádio estiver no modo Station)
 #OBS: Geralmente quando reseta um radio cambium, ele volta no modo station
 #Usuário/senha default é admim/admin
